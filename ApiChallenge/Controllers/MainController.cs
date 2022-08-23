@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Repositories.Interfaces;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace ApiChallenge.Controllers {
 
@@ -46,70 +45,5 @@ namespace ApiChallenge.Controllers {
             return Ok(new PostResult() { ValorLiquido = valorLiquido});
         }
 
-        //private void FindMerchantDiscountRatesMocks(Transaction transaction) {
-        //    //var mdr = GetMerchantDiscountRatesMocks();
-
-        //    //string adquirente;
-        //    //List<MerchantDiscountRates> adquirentes;
-        //    //foreach (var item in mdr) {
-        //    //    adquirente = item.Adquirente.Contains("A") ? "A" : (item.Adquirente.Contains("B") ? "B" : "C");
-
-        //    //}
-             
-        //}
-
-        //private List<MerchantDiscountRates> GetMerchantDiscountRatesMocks() {
-        //    var adA =  new MerchantDiscountRates() {
-        //        Adquirente = "Adquirente A",
-        //        Taxas = new List<Tax>() {
-        //            new Tax() {
-        //                Bandeira = "Visa",
-        //                Credito = 2.25M,
-        //                Debito = 2.00M
-        //            },
-        //             new Tax() {
-        //                Bandeira = "Master",
-        //                Credito = 2.35M,
-        //                Debito = 1.98M
-        //            },
-
-        //        }
-
-        //    };
-
-        //    var adB = new MerchantDiscountRates() {
-        //        Adquirente = "Adquirente B",
-        //        Taxas = new List<Tax>() {
-        //            new Tax() {
-        //                Bandeira = "Visa",
-        //                Credito= 2.50M,
-        //                Debito = 2.0M
-        //            },
-        //            new Tax() {
-        //                Bandeira = "Master",
-        //                Credito = 2.65M,
-        //                Debito = 1.75M
-        //            },
-        //        }
-
-        //    };
-        //    var adC = new MerchantDiscountRates() {
-        //        Adquirente = "Adquirente C",
-        //        Taxas = new List<Tax>() {
-        //            new Tax() {
-        //                Bandeira = "Visa",
-        //                Credito= 2.75M,
-        //                Debito = 2.16M
-        //            },
-        //            new Tax() {
-        //                Bandeira = "Master",
-        //                Credito = 3.10M,
-        //                Debito = 1.58M
-        //            },
-        //        }
-
-        //    };
-        //    return new List<MerchantDiscountRates>() { adA, adB, adC };
-        //}
     }
 }

@@ -1,13 +1,8 @@
 ﻿using ApiChallenge.Repositories.Models;
 using Dapper;
 using MySql.Data.MySqlClient;
-using MySqlX.XDevAPI;
 using Repositories.Interfaces;
-using System.Collections.Generic;
 using System.Data;
-using System.Security.Cryptography;
-using System.Transactions;
-
 
 
 namespace Repositories {
