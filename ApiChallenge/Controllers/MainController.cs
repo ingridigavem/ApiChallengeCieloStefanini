@@ -1,7 +1,6 @@
-﻿using ApiChallenge.Repositories.Models;
+﻿using ApiChallenge.Domain.Entities;
+using ApiChallenge.Domain.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
-using Repositories.Interfaces;
-
 
 namespace ApiChallenge.Controllers {
 
@@ -9,40 +8,33 @@ namespace ApiChallenge.Controllers {
     [ApiController]
     public class MainController : ControllerBase {
 
-        private readonly IConfiguration _configuration;
-        private readonly IMainRepository _repository;
-        public MainController(IConfiguration configuration, IMainRepository repository) {
-            _configuration = configuration;
-            _repository = repository;
+        private readonly IMainService _mainService;
+        public MainController(IMainService mainService) {
+
+            _mainService = mainService;
         }
         // GET: api/mdr>
         [HttpGet("/mdr")]
-        public IEnumerable<object> Get() {
-            return _repository.GetAllMerchantDiscountRates(_configuration.GetConnectionString("Default"));
-        }
+        public IActionResult GetMdr() {
 
+            var search = _mainService.GetAllMerchantDiscountRates();
+
+            if (search == null) 
+                throw new Exception("Um problema ocorreu durante a busca");
+            if (search.Count() == 0) 
+                return NoContent();
+            
+            return Ok(search);
+        }
 
         // POST api/transaction>
         [HttpPost("/transaction")]
-        public IActionResult Post([FromBody] Transaction transaction) {
+        public IActionResult PostTransaction([FromBody] Transaction transaction) {
 
-            string sql = @$"SELECT taxa FROM table_taxes
-                            WHERE bandeira = '{transaction.Bandeira}'
-                                AND adquirente = '{transaction.Adquirente}'
-                                AND tipo = '{transaction.Tipo}' ";
+            if (!ModelState.IsValid)
+                return BadRequest();    
 
-            decimal taxa;
-            decimal valorLiquido;
-
-            try {
-                taxa = _repository.FindTax(sql, _configuration.GetConnectionString("Default"));
-                valorLiquido = (transaction.Valor - taxa);
-            } catch (Exception ex) {
-                return BadRequest(ex);
-                throw;
-            }
-
-            return Ok(new PostResult() { ValorLiquido = valorLiquido});
+            return Ok(_mainService.CalculateTax(transaction));
         }
 
     }
