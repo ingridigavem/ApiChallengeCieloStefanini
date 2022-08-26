@@ -1,6 +1,8 @@
 ﻿using ApiChallenge.Domain.Entities;
 using ApiChallenge.Domain.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
+using System.Net;
 
 namespace ApiChallenge.Controllers {
 
@@ -15,6 +17,10 @@ namespace ApiChallenge.Controllers {
         }
         // GET: api/mdr>
         [HttpGet("/mdr")]
+        [SwaggerOperation("GetMdr")]
+        [SwaggerResponse((int)HttpStatusCode.OK)]
+        [SwaggerResponse((int)HttpStatusCode.NoContent)]
+
         public IActionResult GetMdr() {
 
             var search = _mainService.GetAllMerchantDiscountRates();
@@ -29,6 +35,9 @@ namespace ApiChallenge.Controllers {
 
         // POST api/transaction>
         [HttpPost("/transaction")]
+        [SwaggerOperation("PostTransaction")]
+        [SwaggerResponse((int)HttpStatusCode.OK)]
+        [SwaggerResponse((int)HttpStatusCode.BadRequest)]
         public IActionResult PostTransaction([FromBody] Transaction transaction) {
 
             if (!ModelState.IsValid)
